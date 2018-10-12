@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val greeting = Greeting.Builder(this).setContainsExclamation(true).setTextState(Greeting.TEXT_CAMEL_CASE).build()
+        val greeting = Greeting.Builder(this).setUserName("Hend").setContainsExclamation(true).setTextState(Greeting.TEXT_CAMEL_CASE).build()
         val greetingText = greeting.currentGreeting
 
         textMain.text = greetingText

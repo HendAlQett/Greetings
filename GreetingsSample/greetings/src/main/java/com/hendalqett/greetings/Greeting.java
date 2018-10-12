@@ -16,21 +16,16 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 public class Greeting {
     public static final int TEXT_NORMAL = 1;
     public static final int TEXT_CAMEL_CASE = 2;
-    public static final int GREETINGS_SHORT = 1;
-    public static final int GREETINGS_MEDIUM = 2;
-    public static final int GREETINGS_LONG = 3;
     private Context context;
     private @TextMode
     int textState;
-    private int length;
     private String userName;
     private boolean isContainsExclamation;
     private String value;
 
-    private Greeting(Context context, @TextMode int textState, @GreetingsNumber int length, String userName, boolean isContainsExclamation) {
+    private Greeting(Context context, @TextMode int textState, String userName, boolean isContainsExclamation) {
         this.context = context;
         this.textState = textState;
-        this.length = length;
         this.userName = userName;
         this.isContainsExclamation = isContainsExclamation;
     }
@@ -97,18 +92,11 @@ public class Greeting {
     private @interface TextMode {
     }
 
-    @Retention(SOURCE)
-    @IntDef({GREETINGS_SHORT, GREETINGS_MEDIUM, GREETINGS_LONG})
-    private @interface GreetingsNumber {
-    }
-
     public static class Builder {
 
         private Context context;
         private @TextMode
         int textState = TEXT_NORMAL; // normal or camel case
-        private @GreetingsNumber
-        int length = GREETINGS_LONG; // Short, long , medium
         private String userName = "";
         private boolean isContainsExclamation = false;
 
@@ -121,10 +109,6 @@ public class Greeting {
             return this;
         }
 
-        private Builder setLength(@GreetingsNumber int length) {
-            this.length = length;
-            return this;
-        }
 
         public Builder setUserName(String userName) {
             this.userName = userName;
@@ -137,7 +121,7 @@ public class Greeting {
         }
 
         public Greeting build() {
-            return new Greeting(context, textState, length, userName, isContainsExclamation);
+            return new Greeting(context, textState, userName, isContainsExclamation);
         }
 
     }
